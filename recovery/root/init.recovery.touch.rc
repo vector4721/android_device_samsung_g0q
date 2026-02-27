@@ -1,0 +1,10 @@
+# TWRP Touch Fix — runs on recovery boot to fix STM touchscreen
+# Samsung S22+ (g0q) on Android 15 firmware
+
+on boot
+    # Run touch fix early
+    exec u:r:recovery:s0 -- /system/bin/sh /fix_touch.sh
+
+on property:sys.usb.config=*
+    # Re-run touch fix after USB config (driver may reset)
+    exec u:r:recovery:s0 -- /system/bin/sh /fix_touch.sh
